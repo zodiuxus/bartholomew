@@ -85,16 +85,22 @@ float dist() {
 
 void loop() {
   if (Serial.available() > 0) {
-    incData = Serial.read();
+    // We send the Arduino the following characters when we detect a face: "Y" and "\r".
+    // After which, we trim it so that it doesn't have the return carriage symbol
+    incData = Serial.readString();
+    incData.trim();
 
-    if(incData) {
+    // And basically check whether we've sent the string or not, otherwise it doesn't go through
+    if(incData == "Y") {
       digitalWrite(LED_BUILTIN, HIGH);
       if((distance >= MIN_DIST && distance <= MAX_DIST) && enoughWater){
         digitalWrite(PUMP, HIGH);
-        delay(750);
+        delay(200); // Leak for a short period of time
+        digitalWrite(PUMP, LOW);
+        delay(120000); // Then take a break for two minutes
       }
       else {
-        digitalWrite(PUMP, LOW);
+        digitalWrite(PUMP, LOW); // Mostly implemented as a failsafe
       }
     }
     else {
