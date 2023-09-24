@@ -22,8 +22,7 @@ bool enoughWater = false;
 // 1 for the pump power
 #define PUMP 9
 
-// The analog and 1 digital for the water level sensor
-#define WATER_POWER 6
+// The analog for the water level sensor
 #define WATER_ANA A0
 
 // And lastly, a water level warning LED (if the water level is too low it'll start blinking)
