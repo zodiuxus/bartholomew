@@ -8,7 +8,7 @@
   A0-A7
 */
 
-int incData = 0;
+String incData;
 float distance = 0;
 bool enoughWater = false;
 
